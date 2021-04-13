@@ -24,19 +24,10 @@ def HostsInEnv(){
 properties([
     parameters([
         [
-            $class: 'ChoiceParameter', 
-            choiceType: 'PT_SINGLE_SELECT', 
-            description: '', 
-            filterable: false, 
-            name: 'Release', 
-            randomName: 'choice-parameter-21337077649621572', 
-            script: [
-                $class: 'GroovyScript', 
-                fallbackScript: '', 
-                script: '''
-                    def choices = [ "DEV", "TEST", "STAGE", "PROD"]
-                    return choices'''
-            ]
+                $class: 'ChoiceParameterDefinition',
+                name: 'ami',
+                choices: EnviromentArr(),
+                description: 'AMI',
         ]
     ])
 ])
