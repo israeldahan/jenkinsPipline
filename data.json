@@ -1,0 +1,19 @@
+{
+    "DataCenter" : {
+        "a":{
+            "ClusterId": "a",
+            "ExternalPoint2URL": ["aaa.com"],
+            "InternalPoint2URL": ["bbb.com"],
+            "RSSOUrl": ["rsso_url_1.com","rsso_url_2.com"],
+            "ports": ["1", "2"]
+        },
+        "b":{
+            "ClusterId": "a",
+            "ExternalPoint2URL": ["aaa.com"],
+            "InternalPoint2URL": ["bbb.com"],
+            "RSSOUrl": ["rsso_url_1.com","rsso_url_2.com"],
+            "ports": ["1", "2"]
+        }
+
+    }
+}
