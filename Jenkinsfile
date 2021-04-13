@@ -35,7 +35,7 @@ properties([
                   parameters: [[$class: 'org.biouno.unochoice.model.ScriptlerScriptParameter', name: '', value: '$value']],
                   scriptlerScriptId: 'script.groovy'
             ]
-        ],
+        ]
     ])
 ])
 
