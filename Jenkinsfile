@@ -28,20 +28,7 @@ properties([
       choiceType: 'PT_SINGLE_SELECT',
       name: 'Environment',
       script: 'EnviromentArr()'
-    ],
-    [
-      $class: 'CascadeChoiceParameter',
-      choiceType: 'PT_SINGLE_SELECT',
-      name: 'Host',
-      referencedParameters: 'Environment',
-      script: [
-        $class: 'ScriptlerScript',
-        scriptlerScriptId:'HostsInEnv()',
-        parameters: [
-          [name:'Environment', value: '$Environment']
-        ]
-      ]
-   ]
+    ]
  ])
 ])
 
