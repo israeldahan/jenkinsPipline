@@ -57,8 +57,9 @@ properties([
                             }
                         '''
                 ]
-            ],
-            [$class: 'DynamicReferenceParameter', 
+            ]
+        ],
+        [$class: 'DynamicReferenceParameter', 
                 choiceType: 'ET_FORMATTED_HTML', 
                 description: 'These are the details in HTML format', 
                 name: 'DetailsInHTML', 
