@@ -1,5 +1,5 @@
 def EnviromentArr(){
-    return ["Select:selected", "DEV", "TEST", "STAGE", "PROD"]
+    return [ "DEV", "TEST", "STAGE", "PROD"]
 }
 def HostsInEnv(){
     List devList  = ["Select:selected", "dev1", "dev2"]
