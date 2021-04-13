@@ -27,7 +27,7 @@ properties([
       $class: 'ChoiceParameter',
       choiceType: 'PT_SINGLE_SELECT',
       name: 'Environment',
-      script: 'EnviromentArr()'
+      script: EnviromentArr()
     ]
  ])
 ])
