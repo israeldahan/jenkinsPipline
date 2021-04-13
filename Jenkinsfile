@@ -35,7 +35,7 @@ properties([
                   parameters: [[$class: 'org.biouno.unochoice.model.ScriptlerScriptParameter', name: '', value: '$value']],
                   scriptlerScriptId: 'script.groovy'
             ]
-        ]
+        ],
         [$class: 'CascadeChoiceParameter', 
             choiceType: 'PT_SINGLE_SELECT', 
             description: 'Select the Server from the Dropdown List', 
