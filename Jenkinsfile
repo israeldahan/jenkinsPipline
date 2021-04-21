@@ -35,23 +35,19 @@ def parseData( data ) {
         if (number == 1){
             vars = line.split(",")
         } else {
-            println "$number $line "
-             line.split(",")
-             println line.split(",")
-
-
+            println "test a $number $line "
             Datacenter = line.split(",")[0]
             ClusterID = line.split(",")[1]
             ExternalURL = line.split(",")[2]
             InternalURL = line.split(",")[3]
             rssoURL = line.split(",")[4]
             Subnet = line.split(",")[5]
-            println "$Datacenter, $ClusterID, $ExternalURL, $InternalURL, $rssoURL, $Subnet"
+            println "test b $Datacenter, $ClusterID, $ExternalURL, $InternalURL, $rssoURL, $Subnet"
             def obj = new clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, rssoURL, Subnet)
             println "obj = $obj.Datacenter"
             datacenters.add(obj.Datacenter)
         }
-       println "$number $line"
+       println "test c $number $line"
     }
 }
 
