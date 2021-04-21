@@ -1,9 +1,9 @@
 Datacenter, ClusterID, ExternalURL, InternalURL, rssoURL, Subnet,
 Australia-Sydney,Syd-os,syd-os.gtm-syd.onbmc.com,"syd-os.gtm-syd.onbmc.com	",rsso-syd-os-prod.onbmc.com; rsso-syd-os-qa.onbmc.com;rsso-syd-os-prod.onbmc.com; rsso-syd-os-poc.onbmc.com, 57-56
-Amsterdam – Equinix,ams-k8s-hxnp-01,ams-hxnp1.onbmc.com,ams-hxnp1.onbmc.com,ams-rsso1-dev.onbmc.com; ams-rsso1-qa.onbmc.com; ams-rsso-dev.onbmc.com; ams-rsso-qa.onbmc.com; amsnp-rsso1-poc.onbmc.com,
-Amsterdam – Equinix,ams-k8s-prod,ams-rancher.gtm-ams.onbmc.com,ams-rancher.gtm-ams.onbmc.com,ams-rsso1-poc.onbmc.com; ams-rsso-poc.onbmc.com,
-Amsterdam – Equinix,ams-k8s-hxpd-01,ams-hxpd1.onbmc.com,ams-hxpd1.onbmc.com,ams-rsso1.onbmc.com; ams-rsso-prod.onbmc.com; ams-rsso2-poc.onbmc.com,
-U.S. Commercial - Equinix Chicago,chi-k8s-hxpd-01,chi-hxpd1.onbmc.com ,chi-hxpd1.onbmc.com ,rsso-prod.onbmc.com; chi-rsso1.onbmc.com; chi-rsso2-poc.onbmc.com,
+Amsterdam â€“ Equinix,ams-k8s-hxnp-01,ams-hxnp1.onbmc.com,ams-hxnp1.onbmc.com,ams-rsso1-dev.onbmc.com; ams-rsso1-qa.onbmc.com; ams-rsso-dev.onbmc.com; ams-rsso-qa.onbmc.com; amsnp-rsso1-poc.onbmc.com,
+Amsterdam â€“ Equinix,ams-k8s-prod,ams-rancher.gtm-ams.onbmc.com,ams-rancher.gtm-ams.onbmc.com,ams-rsso1-poc.onbmc.com; ams-rsso-poc.onbmc.com,
+Amsterdam â€“ Equinix,ams-k8s-hxpd-01,ams-hxpd1.onbmc.com,ams-hxpd1.onbmc.com,ams-rsso1.onbmc.com; ams-rsso-prod.onbmc.com; ams-rsso2-poc.onbmc.com,
+U.S. Commercial - Equinix Chicago,chi-k8s-hxpd-01,chi-hxpd1.onbmc.comÂ ,chi-hxpd1.onbmc.comÂ ,rsso-prod.onbmc.com; chi-rsso1.onbmc.com; chi-rsso2-poc.onbmc.com,
 U.S. Commercial - Equinix Chicago,chi-k8s-hxnp-01,chi-hxnp1.onbmc.com,chi-hxnp1.onbmc.com,rsso-dev.onbmc.com; rsso-qa.onbmc.com; chi-rsso1-dev.onbmc.com; chi-rsso1-qa.onbmc.com; chinp-rsso1-poc.onbmc.com,
 U.S. Commercial - Equinix Chicago,chi-k8s-prod,chi-rancher.gtm-chi.onbmc.com,chi-rancher.gtm-chi.onbmc.com,rsso-poc.onbmc.com; chi-rsso1-poc.onbmc.com,
 U.K. - Equinix,lon-os,lon-os.gtm-lon.onbmc.com,lon-os.gtm-lon.onbmc.com,lon-rsso-dev.onbmc.com; lon-rsso-qa.onbmc.com; lon-rsso-prod.onbmc.com; lon-rsso-poc.onbmc.com,

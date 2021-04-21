@@ -24,6 +24,7 @@ def getFile( filePath ){
 def parseData( data ) {
     data.eachLine(2) { line, number ->
         def details
+        def vars
         if (number == 1){
             vars = line.split(",")
             return
