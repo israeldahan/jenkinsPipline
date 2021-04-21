@@ -4,23 +4,24 @@ pipeline {
            vari = ""
     }
     agent any
-
-
-    // def DC = new File("mapping.csv")
-    //
-    // DC.splitEachLine(",") {fields ->
-    //   people.add(
-    //     first_name: fields[0],
-    //     last_name: fields[1],
-    //     email: fields[2]
-    //   )
-    // }
-//     println  people.first_name
-
     stages {
         stage ("setup parameters") {
             steps {
                 script {
+                println "pwd is" + pwd()
+                println "ls is" + ls()
+
+                 def DC = new File("mapping.csv")
+
+                DC.splitEachLine(",") {fields ->
+                  people.add(
+                    first_name: fields[0],
+                    last_name: fields[1],
+                    email: fields[2]
+                  )
+                }
+                println  people.first_name
+
                     properties([
                     parameters([
                         [$class: 'ChoiceParameter',
