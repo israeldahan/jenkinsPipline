@@ -1,4 +1,4 @@
-println "${env.WORKSPACE}"
+println "WORKSPACE ${env.WORKSPACE}"
 def DC = new File("./mapping.csv")
 
 DC.splitEachLine(",") {fields ->
