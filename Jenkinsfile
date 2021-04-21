@@ -1,3 +1,14 @@
+def DC = new File("./mapping.csv")
+
+DC.splitEachLine(",") {fields ->
+  people.add(
+    first_name: fields[0],
+    last_name: fields[1],
+    email: fields[2]
+  )
+}
+println  people.first_name
+
 properties([
     parameters([
         [$class: 'ChoiceParameter', 
