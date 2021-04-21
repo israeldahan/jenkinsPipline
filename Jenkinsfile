@@ -3,15 +3,15 @@ class clusterID {
     String ClusterID
     String ExternalURL
     String InternalURL
-    String rssoURL
+    String RssoURL
     String Subnet
 
-    clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, rssoURL, Subnet) {
+    clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, RssoURL, Subnet) {
         this.Datacenter = Datacenter
         this.ClusterID = ClusterID
         this.ExternalURL = ExternalURL
         this.InternalURL = InternalURL
-        this.rssoURL = rssoURL
+        this.RssoURL = RssoURL
         this.Subnet = Subnet
     }
 }
@@ -29,7 +29,7 @@ def parseData( data ) {
     String ClusterID = ""
     String ExternalURL = ""
     String InternalURL = ""
-    String rssoURL = ""
+    String RssoURL = ""
     String Subnet = ""
     data.eachLine { line, number ->
         if (number == 1){
@@ -43,7 +43,7 @@ def parseData( data ) {
             rssoURL = line.split(",")[4]
             Subnet = line.split(",")[5]
             println "test b $Datacenter, $ClusterID, $ExternalURL, $InternalURL, $rssoURL, $Subnet"
-            def obj = new clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, rssoURL, Subnet)
+            def obj = new clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, RssoURL, Subnet)
             println "obj = $obj.Datacenter"
             datacenters.add(obj.Datacenter)
         }
