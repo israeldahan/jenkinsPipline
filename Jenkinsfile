@@ -57,7 +57,7 @@ def parseData( data ) {
 }
 @NonCPS
 def getDC() {
-    return datacenters
+    return ['datacenters']
 }
 
 pipeline {
