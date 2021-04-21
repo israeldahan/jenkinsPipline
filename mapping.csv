@@ -20,7 +20,7 @@ U.S. Commercial - AWS West (Oregon),or1-os,openshiftexternalhttps-1802553163.us-
 U.S. Commercial - AWS West (Oregon),or1-hx-prod,or1-hx-prod.onbmc.com,or1-hx-prod.onbmc.com,or-rsso1.onbmc.com; or-rsso1-poc.onbmc.com, 57-74
 U.S. Commercial - AWS West (Oregon),or1-hx-nonprod,or1-hx-nonprod.onbmc.com,or1-hx-nonprod.onbmc.com,or-rsso1-dev.onbmc.com; or-rsso1-qa.onbmc.com; ornp-rsso1-poc.onbmc.com, 57-75
 U.S. Commercial - AWS West (Oregon),or1-k8s-hxpd-01,or1-hxpd2.onbmc.com,or1-hxpd2.onbmc.com,, 57-76
-U.S. Commercial - AWS West (Oregon),or1-k8s-hxnp-01,"	or1-hxnp2.onbmc.com",or1-hxnp2.onbmc.com,, 57-77
+U.S. Commercial - AWS West (Oregon),or1-k8s-hxnp-01,or1-hxnp2.onbmc.com,or1-hxnp2.onbmc.com,, 57-77
 North Central U.S. - Azure,ae1-k8s-hxpd-01,ae-hxpd1.onbmc.com,ae-hxpd1.onbmc.com,ae-rsso1-poc.onbmc.com; ae-rsso1.onbmc.com, 57-78
 North Central U.S. - Azure,ae1-k8s-hxnp-01,ae-hxnp1.onbmc.com,ae-hxnp1.onbmc.com,ae-rsso1-dev.onbmc.com; ae-rsso1-qa.onbmc.com; aenp-rsso1-poc.onbmc.com, 57-79
 U.S. FedRAMP - AWS,anv-k8s-prod,anv-k8s-prod-external-711488532.us-east-1.elb.amazonaws.com,anv-k8s-prod-external-711488532.us-east-1.elb.amazonaws.com,anv-rsso1-dev.fed.onbmc.com; anv-rsso1-qa.fed.onbmc.com; anv-rsso1.fed.onbmc.com; anv-rsso1-poc.fed.onbmc.com, 57-80
