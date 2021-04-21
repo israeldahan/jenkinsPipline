@@ -1,3 +1,14 @@
+@NonCPS
+def getFile( filePath ){
+    File file = new File(filePath)
+    return file
+}
+@NonCPS
+def parseData( data ) {
+    data.eachLine(2) { line, number ->
+       println "$number $line"
+    }
+}
 
 pipeline {
     environment {
@@ -8,17 +19,8 @@ pipeline {
         stage ("setup parameters") {
             steps {
                 script {
-                println "pwd is" + pwd()
-                 def DC = new File(  "/mapping.csv")
-
-                DC.splitEachLine(",") {fields ->
-                  people.add(
-                    first_name: fields[0],
-                    last_name: fields[1],
-                    email: fields[2]
-                  )
-                }
-                println  people.first_name
+                File data = getFile("${WORKSPACE}/mapping.csv");
+                parseData( data )
 
                     properties([
                     parameters([
@@ -102,3 +104,4 @@ pipeline {
         }
     }
 }
+
