@@ -1,3 +1,6 @@
+@Grab('com.xlson.groovycsv:groovycsv:1.3')
+import static com.xlson.groovycsv.CsvParser.parseCsv
+
 class clusterID {
     String Datacenter
     String ClusterID
@@ -54,6 +57,10 @@ def parseData( data ) {
         }
 //        println "test c $number $line"
     }
+}
+@NonCPS
+def getDC() {
+    return datacenters
 }
 
 pipeline {
