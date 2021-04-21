@@ -9,7 +9,7 @@ pipeline {
             steps {
                 script {
                 println "pwd is" + pwd()
-                 def DC = new File( pwd() + "/mapping.csv")
+                 def DC = new File(  "/mapping.csv")
 
                 DC.splitEachLine(",") {fields ->
                   people.add(
