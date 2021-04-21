@@ -1,3 +1,4 @@
+println "${WORKSPACE}"
 def DC = new File("./mapping.csv")
 
 DC.splitEachLine(",") {fields ->
