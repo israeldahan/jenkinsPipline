@@ -96,7 +96,7 @@ pipeline {
                                     classpath: [],
                                     sandbox: false,
                                     script:
-                                        '$datacenters'
+                                        'getDC()'
                                 ]
                             ]
                         ],
