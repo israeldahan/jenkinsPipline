@@ -1,5 +1,4 @@
 println "env.WORKSPACE ${env.WORKSPACE}"
-println "WORKSPACE ${WORKSPACE}"
 println "pwd is" + pwd()
 def DC = new File("./mapping.csv")
 
