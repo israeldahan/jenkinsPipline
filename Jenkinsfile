@@ -55,6 +55,10 @@ def parseData( data ) {
 //        println "test c $number $line"
     }
 }
+@NonCPS
+def getDC() {
+    return ['datacenters']
+}
 
 pipeline {
     environment {
@@ -67,11 +71,8 @@ pipeline {
                 script {
                 File data = getFile("${WORKSPACE}/mapping.csv");
                 parseData( data )
-                def getDC() {
-                    return datacenters
-                }
-
-                    properties([
+                def datacentersProp = getDC()
+                properties([
                     parameters([
                         [$class: 'ChoiceParameter',
                             choiceType: 'PT_SINGLE_SELECT',
@@ -92,7 +93,7 @@ pipeline {
                                     classpath: [],
                                     sandbox: false,
                                     script:
-                                        'getDC()'
+                                        '$datacentersProp'
                                 ]
                             ]
                         ],
