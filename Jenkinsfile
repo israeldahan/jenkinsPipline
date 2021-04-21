@@ -36,12 +36,13 @@ def parseData( data ) {
             vars = line.split(",")
         } else {
 //             println "test a $number $line "
-            Datacenter = line.split(",")[0]
-            ClusterID = line.split(",")[1]
-            ExternalURL = line.split(",")[2]
-            InternalURL = line.split(",")[3]
-            rssoURL = line.split(",")[4]
-            Subnet = line.split(",")[5]
+            def lineSplit = line.split(",")
+            Datacenter = lineSplit[0]
+            ClusterID = lineSplit[1]
+            ExternalURL = lineSplit[2]
+            InternalURL = lineSplit[3]
+            RssoURL = lineSplit[4]
+            Subnet = lineSplit[5]
             println "Datacenter = $Datacenter,"
             println "ClusterID = $ClusterID,"
             println "ClusterID = $ExternalURL,"
