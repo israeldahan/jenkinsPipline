@@ -92,8 +92,10 @@ pipeline {
                                 script: [
                                     classpath: [],
                                     sandbox: false,
-                                    script:
-                                        'return ["$datacentersProp"]'
+                                    script: [
+                                        $class: 'ScriptlerScript',
+                                        scriptlerScriptId:'Environments.groovy'
+                                    ]
                                 ]
                             ]
                         ],
