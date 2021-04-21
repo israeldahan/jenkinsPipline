@@ -47,7 +47,7 @@ def parseData( data ) {
             println "ClusterID = $ClusterID,"
             println "ClusterID = $ExternalURL,"
             println "InternalURL = $InternalURL,"
-            println "RssoURL = $rssoURL,"
+            println "RssoURL = $RssoURL,"
             println "Subnet = $Subnet"
             def obj = new clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, RssoURL, Subnet)
             datacenters.add(obj.Datacenter)
