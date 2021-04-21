@@ -17,7 +17,7 @@ pipeline {
     // }
 //     println  people.first_name
 
-    parameters{[
+    parameters{
         [$class: 'ChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select the Env Name from the Dropdown List',
@@ -77,7 +77,7 @@ pipeline {
                 ]
             ]
         ]
-    ]}
+    }
 
     stages {
       stage ("Example") {
