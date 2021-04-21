@@ -40,7 +40,7 @@ pipeline {
                         'return["Dev","QA","Stage","Prod"]'
                 ]
             ]
-        ],
+        ]
         [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select the Server from the Dropdown List',
