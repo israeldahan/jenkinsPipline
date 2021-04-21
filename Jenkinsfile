@@ -1,3 +1,20 @@
+class clusterID {
+    String datacenter
+    String ClusterID
+    String ExternalURL
+    String InternalURL
+    String rssoURL
+    String Subnet
+
+    clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, rssoURL, Subnet) {
+        this.datacenter = datacenter
+        this.ClusterID = ClusterID
+        this.ExternalURL = ExternalURL
+        this.InternalURL = InternalURL
+        this.rssoURL = rssoURL
+        this.Subnet = Subnet
+    }
+}
 @NonCPS
 def getFile( filePath ){
     File file = new File(filePath)
@@ -6,6 +23,23 @@ def getFile( filePath ){
 @NonCPS
 def parseData( data ) {
     data.eachLine(2) { line, number ->
+        def details
+        if (number == 1){
+            vars = line.split(",")
+            return
+        }
+        line.split(",").eachWithIndex(){ it,index ->
+            vars[index] = it
+            // Datacenter =
+            // ClusterID =
+            // ExternalURL =
+            // InternalURL =
+            // rssoURL =
+            // Subnet =
+        }
+        def obj = new clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, rssoURL, Subnet)
+        details.add()
+        println details
        println "$number $line"
     }
 }
