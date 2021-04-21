@@ -1,5 +1,5 @@
-Datacenter name,Cluster ID,External,Internal ,rsso url,
-Australia-Sydney,Syd-os,syd-os.gtm-syd.onbmc.com,"syd-os.gtm-syd.onbmc.com	",rsso-syd-os-prod.onbmc.com; rsso-syd-os-qa.onbmc.com;rsso-syd-os-prod.onbmc.com; rsso-syd-os-poc.onbmc.com,
+Datacenter, ClusterID, ExternalURL, InternalURL, rssoURL, Subnet,
+Australia-Sydney,Syd-os,syd-os.gtm-syd.onbmc.com,"syd-os.gtm-syd.onbmc.com	",rsso-syd-os-prod.onbmc.com; rsso-syd-os-qa.onbmc.com;rsso-syd-os-prod.onbmc.com; rsso-syd-os-poc.onbmc.com, 57-56
 Amsterdam – Equinix,ams-k8s-hxnp-01,ams-hxnp1.onbmc.com,ams-hxnp1.onbmc.com,ams-rsso1-dev.onbmc.com; ams-rsso1-qa.onbmc.com; ams-rsso-dev.onbmc.com; ams-rsso-qa.onbmc.com; amsnp-rsso1-poc.onbmc.com,
 Amsterdam – Equinix,ams-k8s-prod,ams-rancher.gtm-ams.onbmc.com,ams-rancher.gtm-ams.onbmc.com,ams-rsso1-poc.onbmc.com; ams-rsso-poc.onbmc.com,
 Amsterdam – Equinix,ams-k8s-hxpd-01,ams-hxpd1.onbmc.com,ams-hxpd1.onbmc.com,ams-rsso1.onbmc.com; ams-rsso-prod.onbmc.com; ams-rsso2-poc.onbmc.com,
