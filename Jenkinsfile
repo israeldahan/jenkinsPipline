@@ -1,6 +1,3 @@
-@Grab('com.xlson.groovycsv:groovycsv:1.3')
-import static com.xlson.groovycsv.CsvParser.parseCsv
-
 class clusterID {
     String Datacenter
     String ClusterID
