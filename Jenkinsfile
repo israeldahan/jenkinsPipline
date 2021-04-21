@@ -36,7 +36,7 @@ def parseData( data ) {
             vars = line.split(",")
         } else {
 //             println "test a $number $line "
-            def lineSplit = line.split(",")
+            def lineSplit = line.split(',')
             Datacenter = lineSplit[0]
             ClusterID = lineSplit[1]
             ExternalURL = lineSplit[2]
