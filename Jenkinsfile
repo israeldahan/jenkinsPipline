@@ -1,6 +1,6 @@
 println "env.WORKSPACE ${env.WORKSPACE}"
 println "pwd is" + pwd()
-def DC = new File("./mapping.csv")
+def DC = new File("mapping.csv")
 
 DC.splitEachLine(",") {fields ->
   people.add(
