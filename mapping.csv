@@ -1,26 +1,26 @@
-Datacenter name,Cluster ID,External,Internal ,rsso url
-Australia-Sydney,Syd-os,syd-os.gtm-syd.onbmc.com,"syd-os.gtm-syd.onbmc.com	","rsso-syd-os-prod.onbmc.com, rsso-syd-os-qa.onbmc.com,rsso-syd-os-prod.onbmc.com, rsso-syd-os-poc.onbmc.com"
-Amsterdam – Equinix,ams-k8s-hxnp-01,ams-hxnp1.onbmc.com,ams-hxnp1.onbmc.com,"ams-rsso1-dev.onbmc.com, ams-rsso1-qa.onbmc.com, ams-rsso-dev.onbmc.com, ams-rsso-qa.onbmc.com, amsnp-rsso1-poc.onbmc.com"
-Amsterdam – Equinix,ams-k8s-prod,ams-rancher.gtm-ams.onbmc.com,ams-rancher.gtm-ams.onbmc.com,"ams-rsso1-poc.onbmc.com, ams-rsso-poc.onbmc.com"
-Amsterdam – Equinix,ams-k8s-hxpd-01,ams-hxpd1.onbmc.com,ams-hxpd1.onbmc.com,"ams-rsso1.onbmc.com, ams-rsso-prod.onbmc.com, ams-rsso2-poc.onbmc.com"
-U.S. Commercial - Equinix Chicago,chi-k8s-hxpd-01,chi-hxpd1.onbmc.com ,chi-hxpd1.onbmc.com ,"rsso-prod.onbmc.com, chi-rsso1.onbmc.com, chi-rsso2-poc.onbmc.com"
-U.S. Commercial - Equinix Chicago,chi-k8s-hxnp-01,chi-hxnp1.onbmc.com,chi-hxnp1.onbmc.com,"rsso-dev.onbmc.com, rsso-qa.onbmc.com, chi-rsso1-dev.onbmc.com, chi-rsso1-qa.onbmc.com, chinp-rsso1-poc.onbmc.com"
-U.S. Commercial - Equinix Chicago,chi-k8s-prod,chi-rancher.gtm-chi.onbmc.com,chi-rancher.gtm-chi.onbmc.com,"rsso-poc.onbmc.com, chi-rsso1-poc.onbmc.com"
-U.K. - Equinix,lon-os,lon-os.gtm-lon.onbmc.com,lon-os.gtm-lon.onbmc.com,"lon-rsso-dev.onbmc.com, lon-rsso-qa.onbmc.com, lon-rsso-prod.onbmc.com, lon-rsso-poc.onbmc.com"
-U.S. Commercial - Equinix Santa Clara,sjc2-k8s-prod,sjc-rancher.gtm-sjc.onbmc.com,sjc-rancher.gtm-sjc.onbmc.com,"sjc2-rsso1-poc.onbmc.com, sjc2-rsso1-dev.onbmc.com, sjc2-rsso1-qa.onbmc.com, sjc2-rsso1.onbmc.com"
-Germany - AWS,de1-hx-prod,de1-hx-prod.onbmc.com,de1-hx-prod.onbmc.com,"de-rsso1-poc.onbmc.com, de-rsso1-dev.onbmc.com, de-rsso1-qa.onbmc.com, de-rsso1.onbmc.com"
-Germany - AWS,de1-k8s-hxnp-01,de1-hxnp1.onbmc.com,de1-hxnp1.onbmc.com,"de-rsso1-poc.onbmc.com, de-rsso1-dev.onbmc.com, de-rsso1-qa.onbmc.com, de-rsso1.onbmc.com"
-Germany - AWS,de1-k8s-hxpd-01,de1-hxpd1.onbmc.com,de1-hxpd1.onbmc.com,"de-rsso1-poc.onbmc.com,  de-rsso1-dev.onbmc.com, de-rsso1-qa.onbmc.com, de-rsso1.onbmc.com"
-Singapore - AWS,sg1-k8s-prod,sg1-hx-prod.onbmc.com,sg1-hx-prod.onbmc.com,"sg-rsso1-poc.onbmc.com, sg-rsso1-dev.onbmc.com, sg-rsso1-qa.onbmc.com, sg-rsso1.onbmc.com"
-Canada - AWS,ca1-hx-prod,ca1-hx-prod.onbmc.com,ca1-hx-prod.onbmc.com,"ca-rsso1-poc.onbmc.com, ca-rsso1-dev.onbmc.com, ca-rsso1-qa.onbmc.com, ca-rsso1.onbmc.com"
-Brazil - AWS,br1-hx-prod,br1-hx-prod.onbmc.com,br1-hx-prod.onbmc.com,"br-rsso1-poc.onbmc.com, br-rsso1-dev.onbmc.com, br-rsso1-qa.onbmc.com, br-rsso1.onbmc.com"
-South Africa - AWS,za3-hx-prod,za3-hx-prod.onbmc.com,za3-hx-prod.onbmc.com,"za-rsso1-poc.onbmc.com, za-rsso1-dev.onbmc.com, za-rsso1-qa.onbmc.com, za-rsso1.onbmc.com"
-Australia - AWS,au1-hx-prod,au1-hx-prod.onbmc.com,au1-hx-prod.onbmc.com,"au-rsso1-poc.onbmc.com, au-rsso1-dev.onbmc.com, au-rsso1-qa.onbmc.com, au-rsso1.onbmc.com"
-U.S. Commercial - AWS West (Oregon),or1-os,openshiftexternalhttps-1802553163.us-west-2.elb.amazonaws.com,openshiftexternalhttps-1802553163.us-west-2.elb.amazonaws.com,"rsso-or1-os-qa.onbmc.com, rsso-or1-os-poc.onbmc.com, rsso-or1-os-dev.onbmc.com, rsso-or1-os-prod.onbmc.com"
-U.S. Commercial - AWS West (Oregon),or1-hx-prod,or1-hx-prod.onbmc.com,or1-hx-prod.onbmc.com,"or-rsso1.onbmc.com, or-rsso1-poc.onbmc.com", 
-U.S. Commercial - AWS West (Oregon),or1-hx-nonprod,or1-hx-nonprod.onbmc.com,or1-hx-nonprod.onbmc.com,"or-rsso1-dev.onbmc.com, or-rsso1-qa.onbmc.com, ornp-rsso1-poc.onbmc.com"
-U.S. Commercial - AWS West (Oregon),or1-k8s-hxpd-01,or1-hxpd2.onbmc.com,or1-hxpd2.onbmc.com,
-U.S. Commercial - AWS West (Oregon),or1-k8s-hxnp-01,"	or1-hxnp2.onbmc.com",or1-hxnp2.onbmc.com,
-North Central U.S. - Azure,ae1-k8s-hxpd-01,ae-hxpd1.onbmc.com,ae-hxpd1.onbmc.com,"ae-rsso1-poc.onbmc.com, ae-rsso1.onbmc.com"
-North Central U.S. - Azure,ae1-k8s-hxnp-01,ae-hxnp1.onbmc.com,ae-hxnp1.onbmc.com,"ae-rsso1-dev.onbmc.com, ae-rsso1-qa.onbmc.com, aenp-rsso1-poc.onbmc.com"
-U.S. FedRAMP - AWS,anv-k8s-prod,anv-k8s-prod-external-711488532.us-east-1.elb.amazonaws.com,anv-k8s-prod-external-711488532.us-east-1.elb.amazonaws.com,"anv-rsso1-dev.fed.onbmc.com, anv-rsso1-qa.fed.onbmc.com, anv-rsso1.fed.onbmc.com, anv-rsso1-poc.fed.onbmc.com"
+Datacenter name,Cluster ID,External,Internal ,rsso url,
+Australia-Sydney,Syd-os,syd-os.gtm-syd.onbmc.com,"syd-os.gtm-syd.onbmc.com	",rsso-syd-os-prod.onbmc.com; rsso-syd-os-qa.onbmc.com;rsso-syd-os-prod.onbmc.com; rsso-syd-os-poc.onbmc.com,
+Amsterdam – Equinix,ams-k8s-hxnp-01,ams-hxnp1.onbmc.com,ams-hxnp1.onbmc.com,ams-rsso1-dev.onbmc.com; ams-rsso1-qa.onbmc.com; ams-rsso-dev.onbmc.com; ams-rsso-qa.onbmc.com; amsnp-rsso1-poc.onbmc.com,
+Amsterdam – Equinix,ams-k8s-prod,ams-rancher.gtm-ams.onbmc.com,ams-rancher.gtm-ams.onbmc.com,ams-rsso1-poc.onbmc.com; ams-rsso-poc.onbmc.com,
+Amsterdam – Equinix,ams-k8s-hxpd-01,ams-hxpd1.onbmc.com,ams-hxpd1.onbmc.com,ams-rsso1.onbmc.com; ams-rsso-prod.onbmc.com; ams-rsso2-poc.onbmc.com,
+U.S. Commercial - Equinix Chicago,chi-k8s-hxpd-01,chi-hxpd1.onbmc.com ,chi-hxpd1.onbmc.com ,rsso-prod.onbmc.com; chi-rsso1.onbmc.com; chi-rsso2-poc.onbmc.com,
+U.S. Commercial - Equinix Chicago,chi-k8s-hxnp-01,chi-hxnp1.onbmc.com,chi-hxnp1.onbmc.com,rsso-dev.onbmc.com; rsso-qa.onbmc.com; chi-rsso1-dev.onbmc.com; chi-rsso1-qa.onbmc.com; chinp-rsso1-poc.onbmc.com,
+U.S. Commercial - Equinix Chicago,chi-k8s-prod,chi-rancher.gtm-chi.onbmc.com,chi-rancher.gtm-chi.onbmc.com,rsso-poc.onbmc.com; chi-rsso1-poc.onbmc.com,
+U.K. - Equinix,lon-os,lon-os.gtm-lon.onbmc.com,lon-os.gtm-lon.onbmc.com,lon-rsso-dev.onbmc.com; lon-rsso-qa.onbmc.com; lon-rsso-prod.onbmc.com; lon-rsso-poc.onbmc.com,
+U.S. Commercial - Equinix Santa Clara,sjc2-k8s-prod,sjc-rancher.gtm-sjc.onbmc.com,sjc-rancher.gtm-sjc.onbmc.com,sjc2-rsso1-poc.onbmc.com; sjc2-rsso1-dev.onbmc.com; sjc2-rsso1-qa.onbmc.com; sjc2-rsso1.onbmc.com,
+Germany - AWS,de1-hx-prod,de1-hx-prod.onbmc.com,de1-hx-prod.onbmc.com,de-rsso1-poc.onbmc.com; de-rsso1-dev.onbmc.com; de-rsso1-qa.onbmc.com; de-rsso1.onbmc.com,
+Germany - AWS,de1-k8s-hxnp-01,de1-hxnp1.onbmc.com,de1-hxnp1.onbmc.com,de-rsso1-poc.onbmc.com; de-rsso1-dev.onbmc.com; de-rsso1-qa.onbmc.com; de-rsso1.onbmc.com,
+Germany - AWS,de1-k8s-hxpd-01,de1-hxpd1.onbmc.com,de1-hxpd1.onbmc.com,de-rsso1-poc.onbmc.com;  de-rsso1-dev.onbmc.com; de-rsso1-qa.onbmc.com; de-rsso1.onbmc.com,
+Singapore - AWS,sg1-k8s-prod,sg1-hx-prod.onbmc.com,sg1-hx-prod.onbmc.com,sg-rsso1-poc.onbmc.com; sg-rsso1-dev.onbmc.com; sg-rsso1-qa.onbmc.com; sg-rsso1.onbmc.com,
+Canada - AWS,ca1-hx-prod,ca1-hx-prod.onbmc.com,ca1-hx-prod.onbmc.com,ca-rsso1-poc.onbmc.com; ca-rsso1-dev.onbmc.com; ca-rsso1-qa.onbmc.com; ca-rsso1.onbmc.com,
+Brazil - AWS,br1-hx-prod,br1-hx-prod.onbmc.com,br1-hx-prod.onbmc.com,br-rsso1-poc.onbmc.com; br-rsso1-dev.onbmc.com; br-rsso1-qa.onbmc.com; br-rsso1.onbmc.com,
+South Africa - AWS,za3-hx-prod,za3-hx-prod.onbmc.com,za3-hx-prod.onbmc.com,za-rsso1-poc.onbmc.com; za-rsso1-dev.onbmc.com; za-rsso1-qa.onbmc.com; za-rsso1.onbmc.com,
+Australia - AWS,au1-hx-prod,au1-hx-prod.onbmc.com,au1-hx-prod.onbmc.com,au-rsso1-poc.onbmc.com; au-rsso1-dev.onbmc.com; au-rsso1-qa.onbmc.com; au-rsso1.onbmc.com,
+U.S. Commercial - AWS West (Oregon),or1-os,openshiftexternalhttps-1802553163.us-west-2.elb.amazonaws.com,openshiftexternalhttps-1802553163.us-west-2.elb.amazonaws.com,rsso-or1-os-qa.onbmc.com; rsso-or1-os-poc.onbmc.com; rsso-or1-os-dev.onbmc.com; rsso-or1-os-prod.onbmc.com,
+U.S. Commercial - AWS West (Oregon),or1-hx-prod,or1-hx-prod.onbmc.com,or1-hx-prod.onbmc.com,or-rsso1.onbmc.com; or-rsso1-poc.onbmc.com, 
+U.S. Commercial - AWS West (Oregon),or1-hx-nonprod,or1-hx-nonprod.onbmc.com,or1-hx-nonprod.onbmc.com,or-rsso1-dev.onbmc.com; or-rsso1-qa.onbmc.com; ornp-rsso1-poc.onbmc.com,
+U.S. Commercial - AWS West (Oregon),or1-k8s-hxpd-01,or1-hxpd2.onbmc.com,or1-hxpd2.onbmc.com,,
+U.S. Commercial - AWS West (Oregon),or1-k8s-hxnp-01,"	or1-hxnp2.onbmc.com",or1-hxnp2.onbmc.com,,
+North Central U.S. - Azure,ae1-k8s-hxpd-01,ae-hxpd1.onbmc.com,ae-hxpd1.onbmc.com,ae-rsso1-poc.onbmc.com; ae-rsso1.onbmc.com,
+North Central U.S. - Azure,ae1-k8s-hxnp-01,ae-hxnp1.onbmc.com,ae-hxnp1.onbmc.com,ae-rsso1-dev.onbmc.com; ae-rsso1-qa.onbmc.com; aenp-rsso1-poc.onbmc.com,
+U.S. FedRAMP - AWS,anv-k8s-prod,anv-k8s-prod-external-711488532.us-east-1.elb.amazonaws.com,anv-k8s-prod-external-711488532.us-east-1.elb.amazonaws.com,anv-rsso1-dev.fed.onbmc.com; anv-rsso1-qa.fed.onbmc.com; anv-rsso1.fed.onbmc.com; anv-rsso1-poc.fed.onbmc.com,
