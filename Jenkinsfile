@@ -75,6 +75,7 @@ pipeline {
                 parameters {
                     string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '')
                     ChoiceParameter( name: 'Env', description: 'desc', randomName: '', script: 'datacentersProp', choiceType: 'PT_SINGLE_SELECT', filterable: False, filterLength: 0)
+                    }
                 }
             }
         }
