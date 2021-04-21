@@ -93,7 +93,7 @@ pipeline {
                                     classpath: [],
                                     sandbox: false,
                                     script:
-                                        'return [datacentersProp]'
+                                        'return ["$datacentersProp"]'
                                 ]
                             ]
                         ],
