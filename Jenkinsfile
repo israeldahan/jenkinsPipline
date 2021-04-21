@@ -55,10 +55,6 @@ def parseData( data ) {
 //        println "test c $number $line"
     }
 }
-@NonCPS
-def getDC() {
-    return ['datacenters']
-}
 
 pipeline {
     environment {
@@ -71,6 +67,9 @@ pipeline {
                 script {
                 File data = getFile("${WORKSPACE}/mapping.csv");
                 parseData( data )
+                def getDC() {
+                    return datacenters
+                }
 
                     properties([
                     parameters([
