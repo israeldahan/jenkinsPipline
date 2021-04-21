@@ -1,5 +1,5 @@
 class clusterID {
-    String datacenter
+    String Datacenter
     String ClusterID
     String ExternalURL
     String InternalURL
@@ -7,7 +7,7 @@ class clusterID {
     String Subnet
 
     clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, rssoURL, Subnet) {
-        this.datacenter = datacenter
+        this.Datacenter = Datacenter
         this.ClusterID = ClusterID
         this.ExternalURL = ExternalURL
         this.InternalURL = InternalURL
@@ -22,25 +22,35 @@ def getFile( filePath ){
 }
 @NonCPS
 def parseData( data ) {
-    data.eachLine(2) { line, number ->
-        def details
-        def vars
+    def vars
+    def details
+    def datacenters = []
+    String Datacenter = ""
+    String ClusterID = ""
+    String ExternalURL = ""
+    String InternalURL = ""
+    String rssoURL = ""
+    String Subnet = ""
+    data.eachLine { line, number ->
         if (number == 1){
             vars = line.split(",")
-            return
+        } else {
+            println "$number $line "
+             line.split(",")
+             println line.split(",")
+
+
+            Datacenter = line.split(",")[0]
+            ClusterID = line.split(",")[1]
+            ExternalURL = line.split(",")[2]
+            InternalURL = line.split(",")[3]
+            rssoURL = line.split(",")[4]
+            Subnet = line.split(",")[5]
+            println "$Datacenter, $ClusterID, $ExternalURL, $InternalURL, $rssoURL, $Subnet"
+            def obj = new clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, rssoURL, Subnet)
+            println "obj = $obj.Datacenter"
+            datacenters.add(obj.Datacenter)
         }
-        line.split(",").eachWithIndex(){ it,index ->
-            vars[index] = it
-            // Datacenter =
-            // ClusterID =
-            // ExternalURL =
-            // InternalURL =
-            // rssoURL =
-            // Subnet =
-        }
-        def obj = new clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, rssoURL, Subnet)
-        details.add()
-        println details
        println "$number $line"
     }
 }
@@ -78,7 +88,7 @@ pipeline {
                                     classpath: [],
                                     sandbox: false,
                                     script:
-                                        'return["Dev","QA","Stage","Prod"]'
+                                        '$datacenters'
                                 ]
                             ]
                         ],
