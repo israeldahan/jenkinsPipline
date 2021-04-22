@@ -1,120 +1,97 @@
-class clusterID {
-    String Datacenter
-    String ClusterID
-    String ExternalURL
-    String InternalURL
-    String RssoURL
-    String Subnet
-
-    clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, RssoURL, Subnet) {
-        this.Datacenter = Datacenter
-        this.ClusterID = ClusterID
-        this.ExternalURL = ExternalURL
-        this.InternalURL = InternalURL
-        this.RssoURL = RssoURL
-        this.Subnet = Subnet
-    }
-}
-@NonCPS
-def getFile( filePath ){
-    File file = new File(filePath)
-    return file
-}
-@NonCPS
-def parseData( data ) {
-    def vars
-    def details
-    def datacenters = []
-    String Datacenter = ""
-    String ClusterID = ""
-    String ExternalURL = ""
-    String InternalURL = ""
-    String RssoURL = ""
-    String Subnet = ""
-    data.eachLine { line, number ->
-        if (number == 1){
-            vars = line.split(",")
-        } else {
-//             println "test a $number $line "
-            def lineSplit = line.split(',')
-            Datacenter = lineSplit[0]
-            ClusterID = lineSplit[1]
-            ExternalURL = lineSplit[2]
-            InternalURL = lineSplit[3]
-            RssoURL = lineSplit[4]
-            Subnet = lineSplit[5]
-            println "Datacenter = $Datacenter,"
-            println "ClusterID = $ClusterID,"
-            println "ClusterID = $ExternalURL,"
-            println "InternalURL = $InternalURL,"
-            println "RssoURL = $RssoURL,"
-            println "Subnet = $Subnet"
-            def obj = new clusterID(Datacenter, ClusterID, ExternalURL, InternalURL, RssoURL, Subnet)
-            datacenters.add(obj.Datacenter)
-        }
-//        println "test c $number $line"
-    }
-}
-@NonCPS
-def getDC() {
-    return ['datacenters']
-}
+properties([
+    parameters([
+        [$class: 'ChoiceParameter',
+            choiceType: 'PT_SINGLE_SELECT',
+            description: 'Select the Datacenter Name from the Dropdown List',
+            filterLength: 1,
+            filterable: false,
+            name: 'Datacenter',
+            script: [
+                $class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: false,
+                    script:
+                        'return[\'Could not get Datacenter\']'
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: false,
+                    script:
+                        '''
+                            def data =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
+                            def datacenters = ["Select:selected"]
+                            data.eachLine { line, number ->
+                                if (number == 0) {
+                                } else {
+                                    def lineSplit = line.split(',')
+                                    datacenters.add(lineSplit[0])
+                                }
+                            }
+                            datacenters.unique { a, b -> a <=> b }
+                            return datacenters
+                        '''
+                ]
+            ]
+        ],
+        [$class: 'CascadeChoiceParameter',
+            choiceType: 'PT_SINGLE_SELECT',
+            description: 'Select the ClusterID from the Dropdown List',
+            filterLength: 1,
+            filterable: false,
+            name: 'ClusterID',
+            referencedParameters: 'Datacenter',
+            script: [
+                $class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: false,
+                    script:
+                        'return[\'Could not get Datacenter from Datacenter Param\']'
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: false,
+                    script:
+                        '''
+                            def data =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
+                            def ClusterID = ["Select:selected"]
+                            data.eachLine { line, number ->
+                                if (number == 0) {
+                                } else {
+                                    def lineSplit = line.split(',')
+                                    if ( lineSplit[0] == DataCenter ){
+                                        ClusterID.add(lineSplit[1])
+                                    }
+                                }
+                            }
+                            return  ClusterID
+                        '''
+                ]
+            ]
+        ]
+    ])
+])
 
 pipeline {
-    environment {
-           vari = ""
-    }
-    agent any
-    stages {
-        stage ("setup parameters") {
-            steps {
-                script {
-                File data = getFile("${WORKSPACE}/mapping.csv");
-                parseData( data )
-                def datacentersProp = getDC()
-                properties([
-                  parameters([
-                    [
-                      $class: 'ChoiceParameter',
-                      choiceType: 'PT_SINGLE_SELECT',
-                      name: 'Environment',
-                      script: [
-                        $class: 'ScriptlerScript',
-                        scriptlerScriptId:'Environments.groovy'
-                      ]
-                    ],
-                    [
-                      $class: 'CascadeChoiceParameter',
-                      choiceType: 'PT_SINGLE_SELECT',
-                      name: 'Host',
-                      referencedParameters: 'Environment',
-                      script: [
-                        $class: 'ScriptlerScript',
-                        scriptlerScriptId:'HostsInEnv.groovy',
-                        parameters: [
-                          [name:'Environment', value: '$Environment']
-                        ]
-                      ]
-                   ]
-                 ])
-                ])
-                }
-            }
-        }
-        stage ("Example") {
-            steps {
-             script{
-              echo 'Hello'
-              echo "${params.Env}"
-              echo "${params.Server}"
-              if (params.Server.equals("Could not get Environment from Env Param")) {
-                  echo "Must be the first build after Pipeline deployment.  Aborting the build"
-                  currentBuild.result = 'ABORTED'
-                  return
-              }
-              echo "Crossed param validation"
-            } }
-        }
-    }
+  environment {
+         vari = ""
+  }
+  agent any
+  stages {
+      stage ("Example") {
+        steps {
+         script{
+          echo 'Hello'
+          echo "${params.Env}"
+          echo "${params.Server}"
+          if (params.Server.equals("Could not get Environment from Env Param")) {
+              echo "Must be the first build after Pipeline deployment.  Aborting the build"
+              currentBuild.result = 'ABORTED'
+              return
+          }
+          echo "Crossed param validation"
+        } }
+      }
+  }
 }
-
