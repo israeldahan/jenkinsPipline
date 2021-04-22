@@ -7,7 +7,7 @@ properties([
 		string(defaultValue: "ansible-master", description: 'Jenkins Node to build', name: 'node_label'),
 		string(defaultValue: "", description: 'Customer service name in lowercase', name: 'Servicename'),
 		string(defaultValue: "", description: '''Customer name
-         (This field is not mandatory)', name: 'Customer_name'''),
+         (This field is not mandatory)''', name: 'Customer_name'),
         string(defaultValue: "", description: 'Environment Type in lower case(example: dev, qa ,prod, etc ..)', name: 'environment'),
         choice(name: 'non_prod', choices: ['True', 'False'], description: 'if non-prod is true. \n it will have to create a CNAME DB Cname URL - "cust_env"'),
         choice(name: 'dwp', choices: ['True', 'False'], description: 'if DWP basic purchased choose True \n cust-env-dwp.onbmc.com'),
