@@ -2,17 +2,17 @@ properties([
     parameters([
         [$class: 'ChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
-            description: 'Select the Datacenter Name from the Dropdown List',
+            description: 'Select the DataCenter Name from the Dropdown List',
             filterLength: 1,
             filterable: false,
-            name: 'Datacenter',
+            name: 'DataCenter',
             script: [
                 $class: 'GroovyScript',
                 fallbackScript: [
                     classpath: [],
                     sandbox: false,
                     script:
-                        'return[\'Could not get Datacenter\']'
+                        'return[\'Could not get DataCenter\']'
                 ],
                 script: [
                     classpath: [],
@@ -20,16 +20,16 @@ properties([
                     script:
                         '''
                             def data =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
-                            def datacenters = ["Select:selected"]
+                            def DataCenters = ["Select:selected"]
                             data.eachLine { line, number ->
                                 if (number == 0) {
                                 } else {
                                     def lineSplit = line.split(',')
-                                    datacenters.add(lineSplit[0])
+                                    DataCenters.add(lineSplit[0])
                                 }
                             }
-                            datacenters.unique { a, b -> a <=> b }
-                            return datacenters
+                            DataCenters.unique { a, b -> a <=> b }
+                            return DataCenters
                         '''
                 ]
             ]
@@ -40,14 +40,14 @@ properties([
             filterLength: 1,
             filterable: false,
             name: 'ClusterID',
-            referencedParameters: 'Datacenter',
+            referencedParameters: 'DataCenter',
             script: [
                 $class: 'GroovyScript',
                 fallbackScript: [
                     classpath: [],
                     sandbox: false,
                     script:
-                        'return[\'Could not get Datacenter from Datacenter Param\']'
+                        'return[\'Could not get DataCenter from DataCenter Param\']'
                 ],
                 script: [
                     classpath: [],
@@ -60,7 +60,7 @@ properties([
                                 if (number == 0) {
                                 } else {
                                     def lineSplit = line.split(',')
-                                    if ( lineSplit[0] == Datacenter ){
+                                    if ( lineSplit[0] == DataCenter ){
                                         ClusterID.add(lineSplit[1])
                                     }
                                 }
@@ -69,7 +69,45 @@ properties([
                         '''
                 ]
             ]
+        ],
+        [$class: 'CascadeChoiceParameter',
+         choiceType: 'PT_SINGLE_SELECT',
+         description: 'GTM Record (point to URL) External url for CNAME.',
+         filterLength: 1,
+         filterable: false,
+         name: 'ExternalPoint2URL',
+         referencedParameters: 'ClusterID',
+         script: [
+             $class: 'GroovyScript',
+             fallbackScript: [
+                 classpath: [],
+                 sandbox: false,
+                 script:
+                     'return[\'Could not get ExternalPoint2URL from ClusterID Param\']'
+             ],
+             script: [
+                 classpath: [],
+                 sandbox: false,
+                 script:
+                     '''
+                    def data =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
+                    def ExternalPoint2URL = ["Select:selected"]
+                    data.eachLine { line, number ->
+                        if (number == 0) {
+                        } else {
+                            def lineSplit = line.split(',')
+                            if ( lineSplit[1] == ClusterID ){
+                                ExternalPoint2URL.add(lineSplit[2])
+                            }
+                        }
+                    }
+                    println(ExternalPoint2URL)
+                    return  ExternalPoint2URL
+                     '''
+             ]
+         ]
         ]
+
     ])
 ])
 
