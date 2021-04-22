@@ -60,7 +60,7 @@ properties([
                                 if (number == 0) {
                                 } else {
                                     def lineSplit = line.split(',')
-                                    if ( lineSplit[0] == DataCenter ){
+                                    if ( lineSplit[0] == Datacenter ){
                                         ClusterID.add(lineSplit[1])
                                     }
                                 }
