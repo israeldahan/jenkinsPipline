@@ -101,13 +101,84 @@ properties([
                             }
                         }
                     }
-                    println(ExternalPoint2URL)
                     return  ExternalPoint2URL
                      '''
+                 ]
              ]
-         ]
+        ],
+         [$class: 'CascadeChoiceParameter',
+          choiceType: 'PT_SINGLE_SELECT',
+          description: 'GTM Record (point to URL) External url for CNAME.',
+          filterLength: 1,
+          filterable: false,
+          name: 'InternalPoint2URL',
+          referencedParameters: 'ClusterID',
+          script: [
+              $class: 'GroovyScript',
+              fallbackScript: [
+                  classpath: [],
+                  sandbox: false,
+                  script:
+                      'return[\'Could not get InternalPoint2URL from ClusterID Param\']'
+              ],
+              script: [
+                  classpath: [],
+                  sandbox: false,
+                  script:
+                      '''
+                        def data =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
+                        def InternalUrl = []
+                        data.eachLine { line, number ->
+                            if (number == 0) {
+                                } else {
+                                    def lineSplit = line.split(',')
+                                    if ( lineSplit[1] == ClusterID ){
+                                    InternalUrl.add(lineSplit[3])
+                                }
+                            }
+                        }
+                        return  InternalUrl
+                      '''
+                  ]
+              ]
+         ],
+        [$class: 'CascadeChoiceParameter',
+        choiceType: 'PT_SINGLE_SELECT',
+        description: 'GTM Record (point to URL) External url for CNAME.',
+        filterLength: 1,
+        filterable: false,
+        name: 'InternalPoint2URL',
+        referencedParameters: 'ClusterID',
+        script: [
+            $class: 'GroovyScript',
+            fallbackScript: [
+                classpath: [],
+                sandbox: false,
+                script:
+                    'return[\'Could not get InternalPoint2URL from ClusterID Param\']'
+            ],
+            script: [
+                classpath: [],
+                sandbox: false,
+                script:
+                    '''
+                    def data =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
+                    def RssoUrl = []
+                    data.eachLine { line, number ->
+                        if (number == 0) {
+                        } else {
+                            def lineSplit = line.split(',')
+                            if ( lineSplit[1] == ClusterID ){
+                                def RssoUrlArr = lineSplit[4].split(";")
+                                RssoUrl.addAll(RssoUrlArr)
+                            }
+                        }
+                    }
+                    return  RssoUrl
+                    '''
+                ]
+            ]
         ]
-
     ])
 ])
 
