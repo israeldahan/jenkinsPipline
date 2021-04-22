@@ -1,31 +1,22 @@
 properties([
     parameters([
-        choice(
-            choices: ['ONE', 'TWO'],
-            name: 'PARAMETER_01'
-        ),
-        booleanParam(
-            defaultValue: true,
-            description: '',
-            name: 'BOOLEAN'
-        ),
-        text(
-            defaultValue: '''
-            this is a multi-line
-            string parameter example
-            ''',
-             name: 'MULTI-LINE-STRING'
-        ),
-        string(
-            defaultValue: 'scriptcrunch',
-            name: 'STRING-PARAMETER',
-            trim: true
-        ),
-        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?'),
-        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password'),
+        booleanParam(name: 'Allocating_Ip_And_Cnames', defaultValue: true, description: 'Uncheck for skipping Allocating Ip and create custom interal cname records stage.'),
+        booleanParam(name: 'External_And_Internal_Cnames', defaultValue: true, description: 'Uncheck for skipping external and internal Cnames creation stage.'),
+        booleanParam(name: 'Rsso_Realm_Creation', defaultValue: true, description: 'Uncheck for skipping rsso realm creation stage.'),
+        booleanParam(name: 'Mailbox_Creation', defaultValue: true, description: 'Uncheck for skipping mailbox creation stage.'),
+		string(defaultValue: "ansible-master", description: 'Jenkins Node to build', name: 'node_label'),
+		string(defaultValue: "", description: 'Customer service name in lowercase', name: 'Servicename'),
+		string(defaultValue: "", description: '''Customer name
+         (This field is not mandatory)', name: 'Customer_name'''),
+        string(defaultValue: "", description: 'Environment Type in lower case(example: dev, qa ,prod, etc ..)', name: 'environment'),
+        choice(name: 'non_prod', choices: ['True', 'False'], description: 'if non-prod is true. \n it will have to create a CNAME DB Cname URL - "cust_env"'),
+        choice(name: 'dwp', choices: ['True', 'False'], description: 'if DWP basic purchased choose True \n cust-env-dwp.onbmc.com'),
+        choice(name: 'int', choices: ['False', 'True' ], description: 'if int purchased choose True \n cust-env-int.onbmc.com'),
+        choice(name: 'atws', choices: ['False', 'True'], description: 'if atws purchased choose True \n cust-env-atws.onbmc.com '),
+        choice(name: 'dwpC', choices: ['False', 'True'], description: 'if DWP basic purchased choose True \n cust-env-vchat.onbmc.com \n cust-env-dwpcatalog.onbmc.com'),
         [$class: 'ChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
-            description: 'Select the DataCenter Name from the Dropdown List',
+            description: 'Select the DataCenter location from the Dropdown List',
             filterLength: 1,
             filterable: false,
             name: 'DataCenter',
@@ -70,7 +61,7 @@ properties([
                     classpath: [],
                     sandbox: false,
                     script:
-                        'return[\'Could not get DataCenter from DataCenter Param\']'
+                        'return[\'Could not get ClusterID from DataCenter Param\']'
                 ],
                 script: [
                     classpath: [],
@@ -170,7 +161,7 @@ properties([
         description: '',
         filterLength: 1,
         filterable: false,
-        name: 'InternalPoint2URL',
+        name: 'RSSOURL',
         referencedParameters: 'ClusterID',
         script: [
             $class: 'GroovyScript',
@@ -178,7 +169,7 @@ properties([
                 classpath: [],
                 sandbox: false,
                 script:
-                    'return[\'Could not get InternalPoint2URL from ClusterID Param\']'
+                    'return[\'Could not get RSSOURL from ClusterID Param\']'
             ],
             script: [
                 classpath: [],
@@ -186,44 +177,130 @@ properties([
                 script:
                     '''
                     def data =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
-                    def RssoUrl = []
+                    def RSSOURL = []
                     data.eachLine { line, number ->
                         if (number == 0) {
                         } else {
                             def lineSplit = line.split(',')
                             if ( lineSplit[1] == ClusterID ){
                                 def RssoUrlArr = lineSplit[4].split(";")
-                                RssoUrl.addAll(RssoUrlArr)
+                                RSSOURL.addAll(RssoUrlArr)
                             }
                         }
                     }
-                    return  RssoUrl
+                    return  RSSOURL
                     '''
                 ]
             ]
-        ]
+        ],
+        string(name: 'RssoPort', defaultValue: '443', description: ''),
+        string(name: 'email', defaultValue: '', description: 'Email for notification'),
+        string(name: 'RssoUser', defaultValue: '', description: ''),
+        password(name: 'RssoPassword', defaultValue: '', description: 'Enter a password')
     ])
 ])
-
 pipeline {
-  environment {
-         vari = ""
-  }
-  agent any
-  stages {
-      stage ("Example") {
-        steps {
-         script{
-          echo 'Hello'
-          echo "${params.Env}"
-          echo "${params.Server}"
-          if (params.Server.equals("Could not get Environment from Env Param")) {
-              echo "Must be the first build after Pipeline deployment.  Aborting the build"
-              currentBuild.result = 'ABORTED'
-              return
-          }
-          echo "Crossed param validation"
-        } }
-      }
-  }
+    agent {
+	    node {
+		label "${params.node_label}"
+	    }
+	  }
+    stages {
+
+		stage("Git Checkout") {
+			steps {
+			    cleanWs()  //Clean workspace
+			    echo "clonning git repo...."
+			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
+			}
+		}
+		stage("Prepare inventory files"){
+		    steps{
+		        script{
+		            writeFile file: "$WORKSPACE/templates/inventory.properties", text: "company=${Customer_name}\nDataCenter=${DataCenter}\nservicename=${Servicename}\nenvironment=${environment}\nClusterID=${ClusterID}"
+		              }
+		        sh 'chmod -R 777 scripts/'
+			    dir('scripts'){
+			        //Create url's file
+    			        sh './createCommonUrlsandEnvs.sh $environment $Servicename $WORKSPACE/templates/template_ExternalCNAME $WORKSPACE/externalCNAME $dwp $int $atws $dwpC $non_prod'
+                        sh './createCommonUrlsandEnvs.sh $environment $Servicename $WORKSPACE/templates/template_InernalDNS $WORKSPACE/InternalDns $dwp $int $atws $dwpC $non_prod'
+						 //remove prod-env from externalCname file(prods urls are without prod env name)
+						sh "sed -i 's/-prod//' $WORKSPACE/externalCNAME"
+			                   }
+			    }
+
+		    }
+		stage("Allocating IP using IPAM") {
+			     when {
+                //Execute this step only if data center is : Australia – Sydney , Amsterdam – Equinix , U.S. Commercial - Equinix Chicago , U.K. - Equinix , U.S. Commercial - Equinix Santa Clara.
+                expression {"$Allocating_Ip_And_Cnames" == "true" && ("$DataCenter" == 'Australia - Sydney' || "$DataCenter" == 'Amsterdam - Equinix'  || "$DataCenter" == 'U.S. Commercial - Equinix Chicago' || "$DataCenter" == 'U.K. - Equinix' || "$DataCenter" == 'U.S. Commercial - Equinix Santa Clara')}
+                 }
+			steps {
+			    dir('scripts/IPAM'){
+			        echo "skipping ipam..."
+			    //note: need to understand how we get Location and Customer name
+			    sh 'echo Running Allocating Ip using Ipam.......'
+			    sh 'python ./get_free_ip.py $WORKSPACE/ '
+			    sh 'echo Hostnames with IPs are in a file at: $WORKSPACE/InternalDns1'
+			    }
+			}
+		}
+        stage("create Custom Internal Cname records(With ip's)") {
+              when {
+                //Execute this step only if data center is : Australia – Sydney , Amsterdam – Equinix , U.S. Commercial - Equinix Chicago , U.K. - Equinix , U.S. Commercial - Equinix Santa Clara.
+                expression {"$Allocating_Ip_And_Cnames" == "true" && ("$DataCenter" == 'Australia - Sydney' || "$DataCenter" == 'Amsterdam - Equinix'  || "$DataCenter" == 'U.S. Commercial - Equinix Chicago' || "$DataCenter" == 'U.K. - Equinix' || "$DataCenter" == 'U.S. Commercial - Equinix Santa Clara')}
+                 }
+			steps {
+			    dir('scripts'){
+			      sh 'echo Entering create Custom Internal Cname records....'
+			      //sh './runCreateCustomInternalRecordPlaybook.sh $WORKSPACE $email'
+			    }
+			}
+		}
+		stage("Create External and Internal Cname") {
+		    when {
+                expression {"$External_And_Internal_Cnames" == "true"}
+            }
+			steps {
+			    dir('scripts'){
+			     sh 'echo Entering Create External and Internal Cname ..'
+			     sh './runExternalInternalCNAMES.sh $WORKSPACE $ExtermalPoint2URL $InternalPoint2URL $email'
+			    }
+			}
+		}
+		stage("RSSO Realm Creation") {
+		     when {
+                expression {"$Rsso_Realm_Creation" == "true"}
+             }
+			steps {
+			    dir('scripts'){
+			      sh 'python ./create_sso_realm.py --rssoUrl $RSSOURL --rssoPort $RssoPort  --workspace $WORKSPACE --customer $Servicename --envList $environment --rssoUser $RssoUser --rssoPassword $RssoPassword'
+			    }
+			}
+		}
+		stage("Mailbox Creation") {
+		    when {
+                expression {"$Mailbox_Creation" == "true"}
+            }
+			steps {
+			    dir('scripts/Mailbox'){
+			     sh 'echo ${email}'
+			     sh "echo ${servicename}"
+			     sh "python ./create_mailbox.py $WORKSPACE/ $email"
+			    }
+			}
+		}
+    }
+    post {
+        success  {
+            script{
+                print "job is successfull"
+                archiveArtifacts artifacts: 'externalCNAME'
+                if("$Allocating_Ip_And_Cnames" == "true"){
+                    archiveArtifacts artifacts: 'InternalDns1'
+                }
+
+            }
+        }
+    }
 }
