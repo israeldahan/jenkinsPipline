@@ -20,7 +20,7 @@ properties([
                     script:
                         '''
                             def data =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
-                            def DataCenters = ["Select:selected"]
+                            def DataCenters = []
                             data.eachLine { line, number ->
                                 if (number == 0) {
                                 } else {
@@ -55,7 +55,7 @@ properties([
                     script:
                         '''
                             def data =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
-                            def ClusterID = ["Select:selected"]
+                            def ClusterID = []
                             data.eachLine { line, number ->
                                 if (number == 0) {
                                 } else {
@@ -91,7 +91,7 @@ properties([
                  script:
                      '''
                     def data =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
-                    def ExternalPoint2URL = ["Select:selected"]
+                    def ExternalPoint2URL = []
                     data.eachLine { line, number ->
                         if (number == 0) {
                         } else {
