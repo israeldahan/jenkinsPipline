@@ -1,6 +1,6 @@
 DataCenter,Location,locationDC,locationDCSubnet
-Australia-Sydney,Chicago,SYD1;SYD2,179;178
+Australia-Sydney,Sydney,SYD1;SYD2,179;178
 Amsterdam – Equinix,Amsterdam,AMS1;AMS3,175;176
-U.S. Commercial - Equinix Chicago,SanJose,CHI3;CHI4,181;182
+U.S. Commercial - Equinix Chicago,Chicago,CHI3;CHI4,181;182
 U.K. - Equinix,London,LON6;LON8,185;186
-U.S. Commercial - Equinix Santa Clara,Sydney,SJC2;SJC5,183;184
+U.S. Commercial - Equinix Santa Clara,SanJose,SJC2;SJC5,183;184
