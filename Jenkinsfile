@@ -21,6 +21,8 @@ properties([
             name: 'STRING-PARAMETER',
             trim: true
         ),
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?'),
+        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password'),
         [$class: 'ChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select the DataCenter Name from the Dropdown List',
