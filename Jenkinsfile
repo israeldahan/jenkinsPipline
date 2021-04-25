@@ -212,7 +212,7 @@ pipeline {
 			    cleanWs()  //Clean workspace
 // 			    getSubnet("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv")
 			    echo "clonning git repo...."
-			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
+// 			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
 			    println ClusterID
 			    println params.ClusterID
 
