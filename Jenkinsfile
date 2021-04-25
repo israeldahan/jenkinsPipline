@@ -1,5 +1,6 @@
 properties([
     parameters([
+    def
         booleanParam(name: 'Allocating_Ip_And_Cnames', defaultValue: true, description: 'Uncheck for skipping Allocating Ip and create custom interal cname records stage.'),
         booleanParam(name: 'External_And_Internal_Cnames', defaultValue: true, description: 'Uncheck for skipping external and internal Cnames creation stage.'),
         booleanParam(name: 'Rsso_Realm_Creation', defaultValue: true, description: 'Uncheck for skipping rsso realm creation stage.'),
@@ -14,7 +15,6 @@ properties([
         booleanParam(name: 'int',  defaultValue: false, description: 'if int purchased choose True \n cust-env-int.onbmc.com'),
         booleanParam(name: 'atws', defaultValue: false, description: 'if atws purchased choose True \n cust-env-atws.onbmc.com '),
         booleanParam(name: 'dwpC', defaultValue: false, description: 'if DWP basic purchased choose True \n cust-env-vchat.onbmc.com \n cust-env-dwpcatalog.onbmc.com'),
-        string(defaultValue: "https://github.bmc.com/raw/idahan/jenkinsPipline/master/", description: 'link to file csv to configure DC and cluster details', name: 'linkToFile'),
         [$class: 'ChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select the DataCenter location from the Dropdown List',
@@ -34,7 +34,7 @@ properties([
                     sandbox: false,
                     script:
                         '''
-                            def data =  new URL ("${params.linkToFile}/mapping.csv").getText()
+                            def data =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
                             def DataCenters = []
                             data.eachLine { line, number ->
                                 if (number == 0) {
@@ -210,7 +210,6 @@ pipeline {
 
 		stage("Git Checkout") {
 			steps {
-			    println("${params.linkToFile}")
 			    cleanWs()  //Clean workspace
 			    echo "clonning git repo...."
 			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
