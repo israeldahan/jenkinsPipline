@@ -213,6 +213,10 @@ pipeline {
 // 			    getSubnet("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv")
 			    echo "clonning git repo...."
 			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
+			    println ClusterID
+			    println params.ClusterID
+
+			    writeSubnet(ClusterID)
 			}
 		}
 		stage("Prepare inventory files"){
@@ -306,7 +310,7 @@ pipeline {
     }
 }
 
-def writeSubnetFile(file, ClusterID) {
+def writeSubnet(ClusterID) {
     def DCData =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
     def LocationData =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/locations.csv").getText()
     def allSubnet = getAllSubnet(DCData, ClusterID)
