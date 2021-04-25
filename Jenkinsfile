@@ -212,8 +212,8 @@ pipeline {
 			    cleanWs()  //Clean workspace
 			    echo "clonning git repo...."
 			    sh 'cd $WORKSPACE; touch out.txt '
-// 			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
-			    writeSubnet(ClusterID)
+			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
+			   writeSubnet("$ClusterID")
 			}
 		}
 		stage("Prepare inventory files"){
@@ -316,15 +316,15 @@ def writeSubnet(ClusterID) {
     def locationDC = getFromLocationData(DC, LocationData, "locationDC")
     def locationDCSubnet = getFromLocationData(DC, LocationData, "locationDCSubnet")
     def fullSubnetDCs = getAllFullSubnet(locationDCSubnet, allSubnet)
-
     File subnetFile = new File("${WORKSPACE}/out.txt")
     subnetFile.write("")
     writeFileSubnet(subnetFile, location, locationDC, fullSubnetDCs, ClusterID)
-    return success
+    return "success"
 }
+
 @NonCPS
 def getFromSubnetData(DCData, ClusterID, type) {
-    def data
+    def data = ""
     def DC
     def allSubnet = []
     DCData.eachLine { line, number ->
@@ -332,19 +332,23 @@ def getFromSubnetData(DCData, ClusterID, type) {
        } else {
            def lineSplit = line.split(',')
            if ( lineSplit[1] == ClusterID ){
-                switch (type){
-                        case type == "DC":
-                        data = lineSplit[0]
-                        break
-                    case type == "allSubnet":
-                        data = allSubnet.addAll(lineSplit[5].split(";"))
-                        break;
-                }
+               DC = lineSplit[0]
+               allSubnet.addAll(lineSplit[5].split(";"))
             }
        }
    }
+   switch (type) {
+       case  "DC":
+           data = DC
+           break;
+       case  "allSubnet":
+           data = allSubnet
+           break;
+   }
+
    return data;
 }
+
 @NonCPS
 def getFromLocationData(DC, LocationData, type){
     def data
@@ -356,27 +360,32 @@ def getFromLocationData(DC, LocationData, type){
         } else {
             def lineSplit = line.split(',')
             if ( lineSplit[0] == DC ){
-                switch (type) {
-                    case type == "location":
-                        data = lineSplit[1]
-                        break
-                    case type == "locationDC":
-                        data.addAll(lineSplit[2].split(";"))
-                    case type == "locationDCSubnet":
-                        data.addAll(lineSplit[3].split(";"))
-                }
+                location = lineSplit[1]
+                locationDC.addAll(lineSplit[2].split(";"))
+                locationDCSubnet.addAll(lineSplit[3].split(";"))
             }
         }
     }
+        switch (type) {
+            case  "location":
+                data = location
+                break;
+            case  "locationDC":
+                data = locationDC
+                break;
+            case "locationDCSubnet":
+                data = locationDCSubnet
+                break;
+        }
     return data
 }
+
 @NonCPS
 def getAllFullSubnet(locationDCSubnet, allSubnet) {
     def FullSubnetDCs = []
     locationDCSubnet.eachWithIndex { locDCSubnet, index ->
         def fullSubnetDC = []
         allSubnet.eachWithIndex { subnet, indexSub ->
-            println("10.${subnet}.${locDCSubnet}.0")
             fullSubnetDC.add("10.${locDCSubnet}.${subnet}.0")
         }
         FullSubnetDCs.add(fullSubnetDC)
@@ -384,20 +393,13 @@ def getAllFullSubnet(locationDCSubnet, allSubnet) {
     return FullSubnetDCs
 }
 @NonCPS
-def writeFileSubnet(subnetFile, location, locationDC, allSubnetDCs, ClusterID) {
+def writeFileSubnet(subnetFile, location, locationDC, FullSubnetDCs, ClusterID) {
     if (location) {
+        println FullSubnetDCs
         subnetFile.append("Location=${location}\n")
-        subnetFile.append('''DC${location}=${locationDC
-                .toString()
-                .replace("[", "")
-                .replace("]", "")
-                .replace(", ", ",")}\n''')
+        subnetFile.append("DC${location}=${locationDC.toString().replace("[", "").replace("]", "").replace(", ", ",")}\n")
         locationDC.eachWithIndex { it, index ->
-            subnetFile.append('''Subnet${it}_${ClusterID}=${allSubnetDCs[index]
-                    .toString()
-                    .replace("[", "")
-                    .replace("]", "")
-                    .replace(", ", ",")}\n''')
+            subnetFile.append("Subnet${it}_${ClusterID}=${FullSubnetDCs[index].toString().replace("[", "").replace("]", "").replace(", ", ",")}\n")
         }
     }
 }
