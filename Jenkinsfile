@@ -210,12 +210,8 @@ pipeline {
 		stage("Git Checkout") {
 			steps {
 			    cleanWs()  //Clean workspace
-// 			    getSubnet("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv")
 			    echo "clonning git repo...."
-// 			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
-			    println ClusterID
-			    println params.ClusterID
-
+			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
 			    writeSubnet(ClusterID)
 			}
 		}
@@ -313,34 +309,34 @@ pipeline {
 def writeSubnet(ClusterID) {
     def DCData =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
     def LocationData =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/locations.csv").getText()
-    def allSubnet = getAllSubnet(DCData, ClusterID)
+    def (DC, allSubnet) = getAllSubnet(DCData, ClusterID)
 
-    def (location, locationDC, locationDCSubnet) = getLocationData(LocationData)
+    def (location, locationDC, locationDCSubnet) = getLocationData(DC, LocationData)
     def fullSubnetDCs = getAllFullSubnet(locationDCSubnet, allSubnet)
 
     File subnetFile = new File("${WORKSPACE}/out.txt")
     subnetFile.write("")
     writeFileSubnet(subnetFile, location, locationDC, fullSubnetDCs, ClusterID)
+    return success
 }
 
 def getAllSubnet(DCData, ClusterID) {
     def DC
-    def subnets = []
-
+    def allSubnet = []
     DCData.eachLine { line, number ->
        if (number == 0) {
        } else {
            def lineSplit = line.split(',')
            if ( lineSplit[1] == ClusterID ){
                DC = lineSplit[0]
-               subnets.addAll(lineSplit[5].split(";"))
+               allSubnet.addAll(lineSplit[5].split(";"))
            }
        }
    }
-   return allSubnet;
+   return [DC, allSubnet];
 }
 
-def getLocationData(LocationData){
+def getLocationData(DC, LocationData){
     def location
     def locationDC = []
     def locationDCSubnet = []
@@ -365,7 +361,7 @@ def getAllFullSubnet(locationDCSubnet, allSubnet) {
             println("10.${subnet}.${locDCSubnet}.0")
             fullSubnetDC.add("10.${locDCSubnet}.${subnet}.0")
         }
-        FullSubnetDCs.add(allSubnetDC)
+        FullSubnetDCs.add(fullSubnetDC)
     }
 }
 
