@@ -371,6 +371,7 @@ def getFromLocationData(DC, LocationData, type){
 }
 @NonCPS
 def getAllFullSubnet(locationDCSubnet, allSubnet) {
+    def FullSubnetDCs = []
     locationDCSubnet.eachWithIndex { locDCSubnet, index ->
         def fullSubnetDC = []
         allSubnet.eachWithIndex { subnet, indexSub ->
