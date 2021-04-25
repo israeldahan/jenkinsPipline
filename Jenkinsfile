@@ -309,9 +309,11 @@ pipeline {
 def writeSubnet(ClusterID) {
     def DCData =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
     def LocationData =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/locations.csv").getText()
-    def (DC, allSubnet) = getAllSubnet(DCData, ClusterID)
-
-    def (location, locationDC, locationDCSubnet) = getLocationData(DC, LocationData)
+    def  allSubnet = getFromSubnet(DCData, ClusterID, "allSubnet")
+    def DC = getDC (DCData, ClusterID, "DC")
+    def location = getFromLocationData(DC, LocationData, "location")
+    def locationDC = getFromLocationData(DC, LocationData, "locationDC")
+    def locationDCSubnet = getFromLocationData(DC, LocationData, "locationDCSubnet")
     def fullSubnetDCs = getAllFullSubnet(locationDCSubnet, allSubnet)
 
     File subnetFile = new File("${WORKSPACE}/out.txt")
@@ -320,7 +322,7 @@ def writeSubnet(ClusterID) {
     return success
 }
 @NonCPS
-def getAllSubnet(DCData, ClusterID) {
+def getFromSubnet(DCData, ClusterID, type) {
     def DC
     def allSubnet = []
     DCData.eachLine { line, number ->
@@ -328,15 +330,21 @@ def getAllSubnet(DCData, ClusterID) {
        } else {
            def lineSplit = line.split(',')
            if ( lineSplit[1] == ClusterID ){
-               DC = lineSplit[0]
-               allSubnet.addAll(lineSplit[5].split(";"))
-           }
+                switch (type){
+                        case type == "DC":
+                        data = lineSplit[0]
+                        break
+                    case type == "allSubnet":
+                        data = allSubnet.addAll(lineSplit[5].split(";"))
+                        break;
+                }
+            }
        }
    }
-   return [DC, allSubnet];
+   return data;
 }
 @NonCPS
-def getLocationData(DC, LocationData){
+def getFromLocationData(DC, LocationData, type){
     def location
     def locationDC = []
     def locationDCSubnet = []
@@ -345,13 +353,19 @@ def getLocationData(DC, LocationData){
         } else {
             def lineSplit = line.split(',')
             if ( lineSplit[0] == DC ){
-                location = lineSplit[1]
-                locationDC.addAll(lineSplit[2].split(";"))
-                locationDCSubnet.addAll(lineSplit[3].split(";"))
+                switch (type) {
+                    case type == "location":
+                        data = lineSplit[1]
+                        break
+                    case type == "locationDC":
+                        data.addAll(lineSplit[2].split(";"))
+                    case type == "locationDCSubnet":
+                        data.addAll(lineSplit[3].split(";"))
+                }
             }
         }
     }
-    return [location, locationDC, locationDCSubnet]
+    return data
 }
 @NonCPS
 def getAllFullSubnet(locationDCSubnet, allSubnet) {
@@ -363,6 +377,7 @@ def getAllFullSubnet(locationDCSubnet, allSubnet) {
         }
         FullSubnetDCs.add(fullSubnetDC)
     }
+    return FullSubnetDCs
 }
 @NonCPS
 def writeFileSubnet(subnetFile, location, locationDC, allSubnetDCs, ClusterID) {
