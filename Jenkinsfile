@@ -211,7 +211,7 @@ pipeline {
 			steps {
 			    cleanWs()  //Clean workspace
 			    echo "clonning git repo...."
-			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
+// 			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
 			    writeSubnet(ClusterID)
 			}
 		}
