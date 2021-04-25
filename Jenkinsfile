@@ -309,8 +309,8 @@ pipeline {
 def writeSubnet(ClusterID) {
     def DCData =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
     def LocationData =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/locations.csv").getText()
-    def  allSubnet = getFromSubnet(DCData, ClusterID, "allSubnet")
-    def DC = getDC (DCData, ClusterID, "DC")
+    def  allSubnet = getFromSubnetData(DCData, ClusterID, "allSubnet")
+    def DC = getFromSubnetData (DCData, ClusterID, "DC")
     def location = getFromLocationData(DC, LocationData, "location")
     def locationDC = getFromLocationData(DC, LocationData, "locationDC")
     def locationDCSubnet = getFromLocationData(DC, LocationData, "locationDCSubnet")
@@ -322,7 +322,7 @@ def writeSubnet(ClusterID) {
     return success
 }
 @NonCPS
-def getFromSubnet(DCData, ClusterID, type) {
+def getFromSubnetData(DCData, ClusterID, type) {
     def data
     def DC
     def allSubnet = []
