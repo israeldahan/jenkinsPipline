@@ -210,6 +210,7 @@ pipeline {
 		stage("Git Checkout") {
 			steps {
 			    cleanWs()  //Clean workspace
+			    def a = getSubnet("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv")
 			    echo "clonning git repo...."
 			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
 			}
@@ -303,4 +304,9 @@ pipeline {
             }
         }
     }
+}
+
+def getSubnet(file) {
+println "get subnet " + file;
+return "get subnet " + file;
 }
