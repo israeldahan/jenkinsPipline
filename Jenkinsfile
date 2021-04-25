@@ -306,7 +306,79 @@ pipeline {
     }
 }
 
-def getSubnet(file) {
-println "get subnet " + file;
-return "get subnet " + file;
+def writeSubnetFile(file, ClusterID) {
+    def DCData =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
+    def LocationData =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/locations.csv").getText()
+    def allSubnet = getAllSubnet(DCData, ClusterID)
+
+    def (location, locationDC, locationDCSubnet) = getLocationData(LocationData)
+    def fullSubnetDCs = getAllFullSubnet(locationDCSubnet, allSubnet)
+
+    File file = new File("${WORKSPACE}/out.txt")
+    file.write("")
+    writeFileSubnet(file, location, locationDC, fullSubnetDCs, ClusterID)
+}
+
+def getAllSubnet(DCData, ClusterID) {
+    def DC
+    def subnets = []
+
+    DCData.eachLine { line, number ->
+       if (number == 0) {
+       } else {
+           def lineSplit = line.split(',')
+           if ( lineSplit[1] == ClusterID ){
+               DC = lineSplit[0]
+               subnets.addAll(lineSplit[5].split(";"))
+           }
+       }
+   }
+   return allSubnet;
+}
+
+def getLocationData(LocationData){
+    def location
+    def locationDC = []
+    def locationDCSubnet = []
+    LocationData.eachLine { line, number ->
+        if (number == 0) {
+        } else {
+            def lineSplit = line.split(',')
+            if ( lineSplit[0] == DC ){
+                location = lineSplit[1]
+                locationDC.addAll(lineSplit[2].split(";"))
+                locationDCSubnet.addAll(lineSplit[3].split(";"))
+            }
+        }
+    }
+    return location, locationDC, locationDCSubnet
+}
+
+def getAllFullSubnet(locationDCSubnet, allSubnet) {
+    locationDCSubnet.eachWithIndex { locDCSubnet, index ->
+        def fullSubnetDC = []
+        allSubnet.eachWithIndex { subnet, indexSub ->
+            println("10.${subnet}.${locDCSubnet}.0")
+            fullSubnetDC.add("10.${locDCSubnet}.${subnet}.0")
+        }
+        FullSubnetDCs.add(allSubnetDC)
+    }
+}
+
+def writeFileSubnet(file, location, locationDC, allSubnetDCs, ClusterID) {
+    if (location) {
+        file.append("Location=${location}\n")
+        file.append("DC${location}=${locationDC
+                .toString()
+                .replace("[", "")
+                .replace("]", "")
+                .replace(", ", ",")}\n")
+        locationDC.eachWithIndex { it, index ->
+            file.append("Subnet${it}_${ClusterID}=${allSubnetDCs[index]
+                    .toString()
+                    .replace("[", "")
+                    .replace("]", "")
+                    .replace(", ", ",")}\n")
+        }
+    }
 }
