@@ -210,7 +210,7 @@ pipeline {
 		stage("Git Checkout") {
 			steps {
 			    cleanWs()  //Clean workspace
-			    getSubnet("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv")
+// 			    getSubnet("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv")
 			    echo "clonning git repo...."
 			    git 'http://10.177.150.20:3000/core-remedy/helix-activation-playbooks'
 			}
@@ -314,9 +314,9 @@ def writeSubnetFile(file, ClusterID) {
     def (location, locationDC, locationDCSubnet) = getLocationData(LocationData)
     def fullSubnetDCs = getAllFullSubnet(locationDCSubnet, allSubnet)
 
-    File file = new File("${WORKSPACE}/out.txt")
-    file.write("")
-    writeFileSubnet(file, location, locationDC, fullSubnetDCs, ClusterID)
+    File subnetFile = new File("${WORKSPACE}/out.txt")
+    subnetFile.write("")
+    writeFileSubnet(subnetFile, location, locationDC, fullSubnetDCs, ClusterID)
 }
 
 def getAllSubnet(DCData, ClusterID) {
@@ -365,16 +365,16 @@ def getAllFullSubnet(locationDCSubnet, allSubnet) {
     }
 }
 
-def writeFileSubnet(file, location, locationDC, allSubnetDCs, ClusterID) {
+def writeFileSubnet(subnetFile, location, locationDC, allSubnetDCs, ClusterID) {
     if (location) {
-        file.append("Location=${location}\n")
-        file.append('''DC${location}=${locationDC
+        subnetFile.append("Location=${location}\n")
+        subnetFile.append('''DC${location}=${locationDC
                 .toString()
                 .replace("[", "")
                 .replace("]", "")
                 .replace(", ", ",")}\n''')
         locationDC.eachWithIndex { it, index ->
-            file.append('''Subnet${it}_${ClusterID}=${allSubnetDCs[index]
+            subnetFile.append('''Subnet${it}_${ClusterID}=${allSubnetDCs[index]
                     .toString()
                     .replace("[", "")
                     .replace("]", "")
