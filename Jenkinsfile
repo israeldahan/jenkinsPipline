@@ -305,7 +305,7 @@ pipeline {
         }
     }
 }
-
+@NonCPS
 def writeSubnet(ClusterID) {
     def DCData =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/mapping.csv").getText()
     def LocationData =  new URL ("https://github.bmc.com/raw/idahan/jenkinsPipline/master/locations.csv").getText()
@@ -319,7 +319,7 @@ def writeSubnet(ClusterID) {
     writeFileSubnet(subnetFile, location, locationDC, fullSubnetDCs, ClusterID)
     return success
 }
-
+@NonCPS
 def getAllSubnet(DCData, ClusterID) {
     def DC
     def allSubnet = []
@@ -335,7 +335,7 @@ def getAllSubnet(DCData, ClusterID) {
    }
    return [DC, allSubnet];
 }
-
+@NonCPS
 def getLocationData(DC, LocationData){
     def location
     def locationDC = []
@@ -353,7 +353,7 @@ def getLocationData(DC, LocationData){
     }
     return [location, locationDC, locationDCSubnet]
 }
-
+@NonCPS
 def getAllFullSubnet(locationDCSubnet, allSubnet) {
     locationDCSubnet.eachWithIndex { locDCSubnet, index ->
         def fullSubnetDC = []
@@ -364,7 +364,7 @@ def getAllFullSubnet(locationDCSubnet, allSubnet) {
         FullSubnetDCs.add(fullSubnetDC)
     }
 }
-
+@NonCPS
 def writeFileSubnet(subnetFile, location, locationDC, allSubnetDCs, ClusterID) {
     if (location) {
         subnetFile.append("Location=${location}\n")
