@@ -351,7 +351,7 @@ def getLocationData(LocationData){
             }
         }
     }
-    return location, locationDC, locationDCSubnet
+    return [location, locationDC, locationDCSubnet]
 }
 
 def getAllFullSubnet(locationDCSubnet, allSubnet) {
