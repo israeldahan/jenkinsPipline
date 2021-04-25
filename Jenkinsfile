@@ -368,17 +368,17 @@ def getAllFullSubnet(locationDCSubnet, allSubnet) {
 def writeFileSubnet(file, location, locationDC, allSubnetDCs, ClusterID) {
     if (location) {
         file.append("Location=${location}\n")
-        file.append("DC${location}=${locationDC
+        file.append('''DC${location}=${locationDC
                 .toString()
                 .replace("[", "")
                 .replace("]", "")
-                .replace(", ", ",")}\n")
+                .replace(", ", ",")}\n''')
         locationDC.eachWithIndex { it, index ->
-            file.append("Subnet${it}_${ClusterID}=${allSubnetDCs[index]
+            file.append('''Subnet${it}_${ClusterID}=${allSubnetDCs[index]
                     .toString()
                     .replace("[", "")
                     .replace("]", "")
-                    .replace(", ", ",")}\n")
+                    .replace(", ", ",")}\n''')
         }
     }
 }
