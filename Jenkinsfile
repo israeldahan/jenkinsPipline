@@ -1,6 +1,5 @@
 properties([
     parameters([
-    def
         booleanParam(name: 'Allocating_Ip_And_Cnames', defaultValue: true, description: 'Uncheck for skipping Allocating Ip and create custom interal cname records stage.'),
         booleanParam(name: 'External_And_Internal_Cnames', defaultValue: true, description: 'Uncheck for skipping external and internal Cnames creation stage.'),
         booleanParam(name: 'Rsso_Realm_Creation', defaultValue: true, description: 'Uncheck for skipping rsso realm creation stage.'),
