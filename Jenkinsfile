@@ -323,6 +323,7 @@ def writeSubnet(ClusterID) {
 }
 @NonCPS
 def getFromSubnet(DCData, ClusterID, type) {
+    def data
     def DC
     def allSubnet = []
     DCData.eachLine { line, number ->
@@ -345,6 +346,7 @@ def getFromSubnet(DCData, ClusterID, type) {
 }
 @NonCPS
 def getFromLocationData(DC, LocationData, type){
+    def data
     def location
     def locationDC = []
     def locationDCSubnet = []
